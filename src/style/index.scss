@@ -1,0 +1,91 @@
+
+/*reset*/
+body, div, ul, dl, ol, dt, dd, li, p, a, label, span, i, img, input, textarea, header, footer, article, section, nav, aside, figure, h1, h2, h3, h4, h5, h6, table, thead, tbody, tr, th, td {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+*, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: disc;
+}
+
+input, textarea, a {
+  outline: none;
+}
+
+header, footer, article, section, nav, aside, figure {
+  display: block
+}
+
+article {
+  color: #333;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding-left: 10px;
+  padding-right: 30px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+  
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.fa {
+    font: normal normal normal 16px/1 FontAwesome !important;
+}
+
+// 全部边框  
+.border-1px:after{
+  content:'';
+  position: absolute;
+  top:0;
+  left:0;
+  width: 200%;
+  height:200%;
+  border:1px solid #eee;
+  border-radius: 4px;
+  transform:scale(0.5);
+  transform-origin:top left;
+}
+.border-1px-bottom:after{
+  content:'';
+  position: absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  border-bottom:1px solid #eee;
+  transform:scaleY(0.5);
+  transform-origin:left top;
+}
+
+/* 设置chrome自动填充改变背景色*/
+input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-transition-delay: 99999s;
+        -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+    }
