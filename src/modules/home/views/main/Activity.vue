@@ -3,22 +3,34 @@
         <mescroll ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
            <!--   webkit-playsinline="true" /* 这个属性是ios 10中设置可以让视频在小窗内播放，也就是不是全屏播放*/  
               playsinline="true"  // IOS微信浏览器支持小窗内播放
+               x5-playsinline="true"  //在原位置播放 区域播放 但会覆盖底部广告层
+               controls="true"  //显示控制条
+               muted="muted"
+               autoplay="autoplay"
               x-webkit-airplay="allow" 
-              x5-video-player-type="h5"  // 启用H5播放器,是wechat安卓版特性  会触发双击无法暂停播放
+              x5-video-player-type="h5"  // 启用H5播放器,是wechat安卓版特性  会新打开层播放
               x5-video-player-fullscreen="true" // 全屏设置，设置为 true 是防止横屏
               x5-video-orientation="portraint" // 播放器的方向， landscape横屏，portraint竖屏，默认值为竖屏 -->
             <div class="first"> 
             <video
               id="video" 
-              src="static/video.mp4" 
+              src="static/video.mp4"
               loop="loop"
-              controls = "true"
-              poster="static/images/test.jpg" 
+              controls="true"
+              poster="static/8.jpg" 
               preload="auto" 
-            
-              style="object-fit:fill;width:100%;">
+              
+
+              webkit-playsinline="true"
+              playsinline="true"
+
+              x5-playsinline="true"
+              
+              x5-video-orientation="portraint" 
+              x-webkit-airplay="allow"
+              style="object-fit:fill;width: 100%;">
             </video>
-             <!-- <div class="footer-ad-text" @click="adRouter">footer-ad-textfooter-ad-textfooter-ad-textfooter-ad-textfooter-ad-text</div> -->
+             <div class="footer-ad-text" @click="adRouter">footer-ad-textfooter-ad-textfooter-ad</div>
          </div>
     		<h1 v-for="(item,idx) in videos" :key="idx">
                 <div style="position: absolute;z-index: 999;">----------------{{idx}}--------------</div> 
@@ -30,12 +42,13 @@
 </template>
 <script>
     let videoP=null;
-    // document.addEventListener("WeixinJSBridgeReady", function () {
-    //                    videoP = document.getElementById("video");
-    //                     // let v = document.querySelector("#video");
-    //                      alert(videoP)
-    //                     videoP.play();
-    // }, false);
+    //微信
+      // document.addEventListener("WeixinJSBridgeReady", function () {
+      //                  videoP = document.getElementById("video");
+      //                   // let v = document.querySelector("#video");
+      //                    alert('wx')
+      //                   videoP.play();
+      //        }, false);
 
 	export default{
 		name:'Activity',
@@ -66,21 +79,30 @@
             }
         },
         created(){
-            // this.init();
+            this.init();
         },
         mounted(){
             this.currentVideo = this.$refs.videoplayer && this.$refs.videoplayer[0];
 
-            videoP= document.getElementById("video");
-            videoP.play();
+            setTimeout(function(){
+
+                videoP = document.getElementById("video");
+                // let v = document.querySelector("#video");
+                 // alert(typeof videoP.play)
+                // videoP.src="static/video.mp4";
+                // videoP.play();
+
+            },2000);
+
+
         },
         activated(){
-            videoP && videoP.play();
+            // videoP && videoP.play();
         },
        
         methods:{
             adRouter(){
-
+                alert('roter')
             },
             downCallback() {
                 console.log('this.mescroll.version=' + this.mescroll.version);
@@ -101,7 +123,7 @@
                 let me=this;
                 console.log('upCallback')
                 setTimeout(function(){
-                    // me.init(page);
+                    me.init(page);
                 },2*1000);
             },
             init(page){
@@ -125,7 +147,6 @@
                         // width: document.documentElement.clientWidth, //播放器宽度
                         notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
                         controlBar: {
-                            playToggle:{},
                           timeDivider: true,
                           durationDisplay: true,
                           remainingTimeDisplay: false,
@@ -139,8 +160,9 @@
                         playerOptions:playerOptions
                     });
                 }
+                arr.length=1;
                 me.videos=arr;
-                console.log(page)
+                
                 me.$nextTick(() => {
                      // 数据渲染成功后,隐藏下拉刷新的状态
                     me.mescroll.endSuccess(arr.length)
@@ -225,6 +247,7 @@
     .first{
         position: relative;
         background: #fff;
+       
         .footer-ad-text{
             
             color:#fff;
@@ -236,6 +259,7 @@
             height:60px;
             line-height:60px;
             z-index: 9999;
+            opacity: .5;
         }
     }
     .wrap{
@@ -248,9 +272,9 @@
         overflow: auto;
     }
     .mescroll {
-                position: fixed;
-                top: 44px;
-                bottom: 0;
-                height: auto;
-              }
+        position: fixed;
+        top: 44px;
+        bottom: 50px;
+        height: auto;
+    }
 </style>
