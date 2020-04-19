@@ -9,8 +9,8 @@
                autoplay="autoplay"
               x-webkit-airplay="allow" 
               x5-video-player-type="h5"  // 启用H5播放器,是wechat安卓版特性  会新打开层播放
-              x5-video-player-fullscreen="true" // 全屏设置，设置为 true 是防止横屏
-              x5-video-orientation="portraint" // 播放器的方向， landscape横屏，portraint竖屏，默认值为竖屏
+              x5-video-player-fullscreen="true" // 全屏设置，设置为 true 是防止横屏 
+              x5-video-orientation="portraint" // 播放器的方向， landscape横屏，portraint竖屏，默认值为竖屏.需要x5-video-player-type支持
               static/video.mp4 -->
             <div class="first"> 
             <video
@@ -86,15 +86,12 @@
         },
         mounted(){
             this.currentVideo = this.$refs.videoplayer && this.$refs.videoplayer[0];
- videoP = document.getElementById("video");
-            setTimeout(function(){
+            videoP = document.getElementById("video");
 
-                // let v = document.querySelector("#video");
-                 // alert(typeof videoP.play)
-                // videoP.src="static/video.mp4";
-                // videoP.play();
-
-            },2000);
+             videoP.addEventListener("canplaythrough",function(){
+                console.log('当前视频总长度:'+this.duration/60+'分')
+             })
+          
 
             videoP.addEventListener("touchstart",function(){
                 alert(this.paused)
