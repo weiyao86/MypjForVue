@@ -20,20 +20,20 @@ let router = new Router({
 });
 
 router.beforeEach(({
-    name
+	name
 }, from, next) => {
 
-    if (name === "Login") {
-        next();
-    } else {
+	if (name === "Login") {
+		next();
+	} else {
 
-        let token = localStorage.getItem("userInfo");
-        if (!token) {
-            next('/'); //对应以上path
-        } else {
-            next();
-        }
-    }
+		let token = localStorage.getItem("userInfo");
+		if (!token) {
+			next('/'); //对应以上path
+		} else {
+			next();
+		}
+	}
 })
 
 

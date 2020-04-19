@@ -10,16 +10,17 @@
               x-webkit-airplay="allow" 
               x5-video-player-type="h5"  // 启用H5播放器,是wechat安卓版特性  会新打开层播放
               x5-video-player-fullscreen="true" // 全屏设置，设置为 true 是防止横屏
-              x5-video-orientation="portraint" // 播放器的方向， landscape横屏，portraint竖屏，默认值为竖屏 -->
+              x5-video-orientation="portraint" // 播放器的方向， landscape横屏，portraint竖屏，默认值为竖屏
+              static/video.mp4 -->
             <div class="first"> 
             <video
               id="video" 
               src="static/video.mp4"
               loop="loop"
-              controls="true"
+              
               poster="static/8.jpg" 
               preload="auto" 
-              
+              autoplay="autoplay"
 
               webkit-playsinline="true"
               playsinline="true"
@@ -27,10 +28,12 @@
               x5-playsinline="true"
               
               x5-video-orientation="portraint" 
+              x5-video-player-fullscreen="true"
               x-webkit-airplay="allow"
               style="object-fit:fill;width: 100%;">
             </video>
              <div class="footer-ad-text" @click="adRouter">footer-ad-textfooter-ad-textfooter-ad</div>
+             
          </div>
     		<h1 v-for="(item,idx) in videos" :key="idx">
                 <div style="position: absolute;z-index: 999;">----------------{{idx}}--------------</div> 
@@ -83,16 +86,24 @@
         },
         mounted(){
             this.currentVideo = this.$refs.videoplayer && this.$refs.videoplayer[0];
-
+ videoP = document.getElementById("video");
             setTimeout(function(){
 
-                videoP = document.getElementById("video");
                 // let v = document.querySelector("#video");
                  // alert(typeof videoP.play)
                 // videoP.src="static/video.mp4";
                 // videoP.play();
 
             },2000);
+
+            videoP.addEventListener("touchstart",function(){
+                alert(this.paused)
+                if(this.paused){
+                    this.play();
+                }else{
+                    this.pause();
+                }
+            });
 
 
         },
@@ -103,6 +114,10 @@
         methods:{
             adRouter(){
                 alert('roter')
+            },
+            btnPlay(){
+                 videoP = document.getElementById("video");
+                 videoP.play();
             },
             downCallback() {
                 console.log('this.mescroll.version=' + this.mescroll.version);
