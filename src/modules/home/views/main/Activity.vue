@@ -30,6 +30,7 @@
               x5-video-orientation="portraint" 
               x5-video-player-fullscreen="true"
               x-webkit-airplay="allow"
+              @canplay="onPlayerCanplay($event)"
               style="object-fit:fill;width: 100%;">
             </video>
              <div class="footer-ad-text" @click="adRouter">footer-ad-textfooter-ad-textfooter-ad</div>
@@ -45,6 +46,14 @@
 </template>
 <script>
     let videoP=null;
+    // 检测微信环境
+    // var ua = window.navigator.userAgent.toLowerCase();
+    // Vue.prototype.inWeixin = ua.match(/MicroMessenger/i) == 'micromessenger'
+
+    // // 检测是ios还是android
+    // var u = navigator.userAgent;
+    // // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+    // Vue.prototype.inIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     //微信
       // document.addEventListener("WeixinJSBridgeReady", function () {
       //                  videoP = document.getElementById("video");
@@ -243,6 +252,33 @@
             onPlayerTimeupdate(evt){
                 // alert('onPlayerTimeupdate')
             },
+
+             onPlayerCanplay(){
+                 //解决自动全屏
+                 try{
+                  var me=this,
+                      ua = navigator.userAgent.toLocaleLowerCase(),
+                      video=me.$refs.videoPlayer[0];
+                      // video=video.$el.getElementsByTagName("video")[0];
+                      // debugger;
+                      //x5内核
+                    if (ua.match(/tencenttraveler/) != null || ua.match(/qqbrowse/) != null) {
+                        var flag=true;
+                        
+                        video.setAttribute('x-webkit-airplay',flag );
+                        video.setAttribute('x5-playsinline',flag );
+                        video.setAttribute('webkit-playsinline',flag );
+                        video.setAttribute('playsinline',flag );
+                    }else{
+                      //ios端
+                        video.setAttribute('webkit-playsinline',"true");
+                        video.setAttribute('playsinline',"true") ;
+                    }
+                 }
+                 catch(error){
+                   console.log(error);
+                 }
+              },
 
             mescrollInit(mescroll){
                 this.mescroll=mescroll;
