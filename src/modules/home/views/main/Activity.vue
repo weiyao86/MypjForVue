@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap">
+    <div class="wrap">
         <mescroll ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
            <!--   webkit-playsinline="true" /* 这个属性是ios 10中设置可以让视频在小窗内播放，也就是不是全屏播放*/  
               playsinline="true"  // IOS微信浏览器支持小窗内播放
@@ -13,36 +13,37 @@
               x5-video-orientation="portraint" // 播放器的方向， landscape横屏，portraint竖屏，默认值为竖屏.需要x5-video-player-type支持
               static/video.mp4 -->
             <div class="first"> 
-            <video
-              id="video" 
-              src="static/video.mp4"
-              loop="loop"
-              
-              poster="static/8.jpg" 
-              preload="auto" 
-              autoplay="autoplay"
+                <video
+                  id="video" 
+                  src="static/video.mp4"
+                  loop="loop"
+                  
+                  poster="static/8.jpg" 
+                  preload="auto" 
+                  autoplay="autoplay"
+                  controls
 
-              webkit-playsinline="true"
-              playsinline="true"
+                  webkit-playsinline="true"
+                  playsinline="true"
 
-              x5-playsinline="true"
-              
-              x5-video-orientation="portraint" 
-              x5-video-player-fullscreen="true"
-              x-webkit-airplay="allow"
-              @canplay="onPlayerCanplay($event)"
-              style="object-fit:fill;width: 100%;">
-            </video>
+                  x5-playsinline="true"
+                  
+                  x5-video-orientation="portraint" 
+                  x5-video-player-fullscreen="true"
+                  x-webkit-airplay="allow"
+                  @canplay="onPlayerCanplay($event)"
+                  style="object-fit:fill;width: 100%;">
+                </video>
              <div class="footer-ad-text" @click="adRouter">footer-ad-textfooter-ad-textfooter-ad</div>
              
          </div>
-    		<h1 v-for="(item,idx) in videos" :key="idx">
+            <!-- <h1 v-for="(item,idx) in videos" :key="idx">
                 <div style="position: absolute;z-index: 999;">----------------{{idx}}--------------</div> 
                 <video-player  class="video-player vjs-custom-skin" ref="videoplayer" :id="idx" :playsinline="true" :options="item.playerOptions" @play="onPlay($event)" @pause="onPause($event)" @timeupdate="onPlayerTimeupdate($event)"></video-player>
 
-            </h1>
+            </h1> -->
         </mescroll>
-	</div>
+    </div>
 </template>
 <script>
     let videoP=null;
@@ -62,8 +63,8 @@
       //                   videoP.play();
       //        }, false);
 
-	export default{
-		name:'Activity',
+    export default{
+        name:'Activity',
         data(){
             return {
                 mescroll:null,
@@ -284,7 +285,7 @@
                 this.mescroll=mescroll;
             }
         }
-	}
+    }
 </script>
 <style type="text/css" lang="scss">
     h1{
