@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	state: {
-		photoTitle: ''
+		title: ''
 	},
 	mutations: {
-		changePhotoTitle(state, user) {
+		changeTitle(state, user) {
 			// 变更状态
-			state.photoTitle = user.title;
+			state.title = user.title;
 		}
 	}
 })

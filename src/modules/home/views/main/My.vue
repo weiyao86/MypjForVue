@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div class="wrap-page-global">
         <div class="header">
             <div class="head-portrait">
                 <img src="static/8.jpg" alt="暂时无法查看">
@@ -23,10 +23,7 @@
     }
 </script>
 <style type="text/css" lang="scss" scoped>
-    .wrap{
-        background: #fff;
-        padding:0 10px;
-    }
+   
     .header{
         height:200px;
         background: #fe7c7f;

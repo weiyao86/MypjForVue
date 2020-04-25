@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap">
+	<div class="wrap-page-global">
 		<div class="h-title">
 			<div class="h-title-l">我的相册</div>
 			<div class="h-title-r"><span><i class="fa fa-plus-circle"></i>新建相册</span></div>
@@ -96,9 +96,7 @@
 	}
 </script>
 <style type="text/css" lang="scss">
-	.wrap{
-		background: #eee;
-	}
+
 	.h-title{
 		display: flex;
 		padding: 20px;

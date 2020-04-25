@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div class="wrap-page-global">
         <mescroll ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
            <!--   webkit-playsinline="true" /* 这个属性是ios 10中设置可以让视频在小窗内播放，也就是不是全屏播放*/  
               playsinline="true"  // IOS微信浏览器支持小窗内播放
@@ -37,11 +37,19 @@
              <div class="footer-ad-text" @click="adRouter">footer-ad-textfooter-ad-textfooter-ad</div>
              
          </div>
-            <!-- <h1 v-for="(item,idx) in videos" :key="idx">
+            <h1 v-for="(item,idx) in videos" :key="idx">
                 <div style="position: absolute;z-index: 999;">----------------{{idx}}--------------</div> 
                 <video-player  class="video-player vjs-custom-skin" ref="videoplayer" :id="idx" :playsinline="true" :options="item.playerOptions" @play="onPlay($event)" @pause="onPause($event)" @timeupdate="onPlayerTimeupdate($event)"></video-player>
 
-            </h1> -->
+            </h1>
+            <button @click="isShow = !isShow">Toggle show</button>
+            <transition name="bounce" > 
+            <slot-demo v-show="isShow" v-slot="{ temp }" :prop="$props" >
+                
+                     {{temp.name}}
+                        ----slotProps is NOT available here
+            </slot-demo>
+        </transition>
         </mescroll>
     </div>
 </template>
@@ -63,10 +71,16 @@
       //                   videoP.play();
       //        }, false);
 
+      import SlotDemo from '@/components/Slot';
     export default{
         name:'Activity',
+        props:['contents'],
+        components:{
+            SlotDemo
+        },
         data(){
             return {
+                isShow:true,
                 mescroll:null,
                 mescrollDown:{
                     auto:false,  // 是否在初始化完毕之后自动执行下拉回调callback; 默认true
@@ -92,9 +106,11 @@
             }
         },
         created(){
+            
             this.init();
         },
         mounted(){
+            let me=this;
             this.currentVideo = this.$refs.videoplayer && this.$refs.videoplayer[0];
             videoP = document.getElementById("video");
 
@@ -112,6 +128,7 @@
                 }
             });
 
+            setTimeout(()=>me.isShow=false,3000);
 
         },
         activated(){
@@ -288,6 +305,21 @@
     }
 </script>
 <style type="text/css" lang="scss">
+    .bounce-enter-active {
+      animation: bounce-in .5s;
+    }
+    .bounce-leave-active {
+      animation: bounce-in .5s reverse;
+    }
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+      }
+      
+      100% {
+        transform: scale(1);
+      }
+    }
     h1{
         height:200px;
         margin: 40px 0;
@@ -311,15 +343,7 @@
             opacity: .5;
         }
     }
-    .wrap{
-        position:fixed;
-        top:40px;
-        bottom:0;
-        width:100%;
-        height: auto;
-        padding-bottom: 10px;
-        overflow: auto;
-    }
+
     .mescroll {
         position: fixed;
         top: 44px;

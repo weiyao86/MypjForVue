@@ -5,7 +5,19 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     
     <title>myprj</title>
+<script>
+  
+  let setRootFontSize=()=>{
+        //设计稿750为基准
+        let ftsize=Math.min(window.screen.width,document.documentElement.clientWidth) * 16 / 375  +'px';
+        // let ftsize=16  / 375 * 100 +'vw';  //vw 支持IOS8,Android 4.4以上
+        document.documentElement.style.fontSize=ftsize;
+        console.log(ftsize)
+    }
 
+    window.addEventListener('resize',setRootFontSize);
+    setRootFontSize();
+</script>
   </head>
   <body>
     <div id="app"></div>

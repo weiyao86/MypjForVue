@@ -81,6 +81,11 @@ article {
   transform-origin:left top;
 }
 
+.wrap-page-global{
+    position: relative;
+    padding:40px 0 54px 0;
+}
+
 /* 设置chrome自动填充改变背景色*/
 input:-webkit-autofill,
     input:-webkit-autofill:hover,

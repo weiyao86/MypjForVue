@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap">
+	<div class="wrap-page-global">
         <div class="h-title">
             <div class="h-title-l">我的音乐影集</div>
             <div class="h-title-r"><span><i class="fa fa-bell-o"></i>影集消息</span></div>
@@ -152,10 +152,7 @@
 	}
 </script>
 <style type="text/css" lang="scss" scoped>
-    .wrap{
-        background: #fff;
-        padding:0 10px;
-    }
+
 	.h-title{
         display: flex;
         padding: 20px;

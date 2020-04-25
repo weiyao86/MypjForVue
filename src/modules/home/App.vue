@@ -1,6 +1,18 @@
 <template>
   <div id="app">
-    <router-view/>
+
+          <keep-alive>
+             <router-view v-if="$route.meta.keepAlive"></router-view>
+          </keep-alive> 
+             <router-view v-if=!$route.meta.keepAlive></router-view>
+      
+
+      <mt-tabbar fixed v-model="$route.name" v-show="$route.meta.navShow">
+            <mt-tab-item v-for="tab in tabs" :id="tab.id" v-bind:key="tab.id" @click.native="toLink(tab.id)">
+                <div slot="icon"><i :class="'fa fa-'+tab.icon"></i></div>
+                {{tab.name}}
+            </mt-tab-item>
+     </mt-tabbar>
   </div>
 </template>
 
@@ -17,7 +29,38 @@
     window.addEventListener('resize',setRootFontSize);
     setRootFontSize();
     export default {
-      name: 'App'
+      name: 'App',
+      data() {
+          return {
+            tabs: [{
+              'id': 'Photos',
+              'name': '相册',
+              'icon': 'photo',
+              'title': '家庭相册'
+            }, {
+              'id': 'Video',
+              'name': '影集',
+              'icon': 'video-camera',
+              'title': '时光影集'
+            }, {
+              'id': 'Activity',
+              'name': '活动',
+              'icon': 'users',
+              'title': '活动'
+            }, {
+              'id': 'My',
+              'name': '我的',
+              'icon': 'heart',
+              'title': '我的'
+            }]
+          }
+      },
+      methods:{
+        toLink(pageId){
+          let me=this;
+          me.$router.push(pageId);
+        }
+      }
     }
 </script>
 
