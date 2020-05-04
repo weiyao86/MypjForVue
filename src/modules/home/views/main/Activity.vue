@@ -118,8 +118,8 @@
                 console.log('当前视频总长度:'+this.duration/60+'分')
              })
           
-
-            videoP.addEventListener("touchstart",function(){
+alert(videoP)
+            videoP.addEventListener("click",function(){
                 alert(this.paused)
                 if(this.paused){
                     this.play();
@@ -128,7 +128,13 @@
                 }
             });
 
+            document.addEventListener("click",function(){
+              alert(this)
+            })
+
             setTimeout(()=>me.isShow=false,3000);
+
+
 
         },
         activated(){

@@ -92,10 +92,34 @@
 					}, 1000);
 				}
 			});
+
+			me.testAsync();
+		},
+
+		methods:{
+
+			async testAsync(){
+				let me=this;
+				
+				try{
+					
+					let rst = await me.t();
+					console.log(rst);
+					let rst2 = await common.axios('/api/getVideoApi');
+					console.log(rst2);
+				}catch(error){
+					console.log(error.toJSON())
+				}
+			},
+			t(){
+				return common.axios('/api/getPhotoApi');
+			}
 		}
+
+
 	}
 </script>
-<style type="text/css" lang="scss">
+<style type="text/css" lang="less">
 
 	.h-title{
 		display: flex;

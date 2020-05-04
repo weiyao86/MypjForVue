@@ -1,3 +1,6 @@
+
+
+
 <template>
 	<div class="wrap-page-global">
         <div class="h-title">
@@ -135,6 +138,9 @@
 
         methods:{
              setShowVideo(isShow){
+
+
+                // this.$store.dispatch('changeTest',{name:'name'});
                 
                 let video=document.getElementById("video");
                 // if(!isShow ){

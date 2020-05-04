@@ -12,6 +12,15 @@ const store = new Vuex.Store({
 			// 变更状态
 			state.title = user.title;
 		}
+	},
+	actions: {
+		changeTest({
+			commit,
+			state
+		}, obj) {
+
+			commit('changeTitle', obj)
+		}
 	}
 })
 
