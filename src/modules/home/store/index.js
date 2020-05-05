@@ -5,7 +5,12 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	state: {
-		title: ''
+		title: 'testTitle'
+	},
+	getters: {
+		getTitle(state) {
+			return state.title;
+		}
 	},
 	mutations: {
 		changeTitle(state, user) {
@@ -20,6 +25,13 @@ const store = new Vuex.Store({
 		}, obj) {
 
 			commit('changeTitle', obj)
+		}
+	},
+	modules: {
+		modulesA: {
+			state: {
+				title: 'modulesA testTitle'
+			}
 		}
 	}
 })

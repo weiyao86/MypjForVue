@@ -42,10 +42,10 @@
                 <video-player  class="video-player vjs-custom-skin" ref="videoplayer" :id="idx" :playsinline="true" :options="item.playerOptions" @play="onPlay($event)" @pause="onPause($event)" @timeupdate="onPlayerTimeupdate($event)"></video-player>
 
             </h1>
-            <button @click="isShow = !isShow">Toggle show</button>
+            <button @click="isShow = !isShow">{{isTitle}}Toggle show  {{getTitle}}</button>
             <transition name="bounce" > 
             <slot-demo v-show="isShow" v-slot="{ temp }" :prop="$props" >
-                
+               
                      {{temp.name}}
                         ----slotProps is NOT available here
             </slot-demo>
@@ -72,11 +72,20 @@
       //        }, false);
 
       import SlotDemo from '@/components/Slot';
+      import {mapGetters,mapState,mapActions} from 'vuex';
     export default{
         name:'Activity',
         props:['contents'],
         components:{
             SlotDemo
+        },
+        computed:{
+          ...mapState({
+            isTitle:'title'
+            }),
+            ...mapGetters({
+              getTitle:'getTitle'
+              })
         },
         data(){
             return {
@@ -107,6 +116,14 @@
         },
         created(){
             
+            // console.log(this.$store.getters.getTitle);
+            // console.log(this.$store.state.title);
+            // // this.$store.dispatch("changeTest",{title:'action'});
+            // this.changeTest({title:'action111'})
+            // console.log(this.$store.getters.getTitle);
+            
+            // alert(this.$store.state.modulesA.title)
+
             this.init();
         },
         mounted(){
@@ -142,6 +159,9 @@ alert(videoP)
         },
        
         methods:{
+            ...mapActions({
+              changeTest:'changeTest'
+            }),
             adRouter(){
                 alert('roter')
             },
